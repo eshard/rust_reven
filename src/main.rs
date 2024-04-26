@@ -11,17 +11,17 @@ struct MyCallback<T: CallbackData> {
     callback: Box<dyn Fn(&T)>,
 }
 
-trait MyTrait<T: CallbackData> {
+trait MyTrait<'a, T: CallbackData> {
     fn set_callback(&mut self, cb: MyCallback<T>);
     fn do_something(&self);
 }
 
-struct MyStruct<T: CallbackData> {
+struct MyStruct<'a, T: CallbackData> {
     callbacks: Vec<MyCallback<T>>,
-    data: [u8; 3],
+    data: &'a [u8; 3],
 }
 
-impl<'a> MyTrait<MyCallbackData<'a>> for MyStruct<MyCallbackData<'a>> {
+impl<'a> MyTrait<'a, MyCallbackData<'a>> for MyStruct<'a, MyCallbackData<'a>> {
     fn set_callback(&mut self, cb: MyCallback<MyCallbackData<'a>>) {
         self.callbacks.push(cb);
     }
@@ -30,7 +30,7 @@ impl<'a> MyTrait<MyCallbackData<'a>> for MyStruct<MyCallbackData<'a>> {
 
         for cb in &self.callbacks {
             let cb_data = MyCallbackData {
-                data: &self.data,
+                data: self.data,
             };
 
             (cb.callback)(&cb_data);
@@ -41,7 +41,7 @@ impl<'a> MyTrait<MyCallbackData<'a>> for MyStruct<MyCallbackData<'a>> {
 fn main() {
     let mut s = MyStruct {
         callbacks: Vec::new(),
-        data: [1, 2, 3],
+        data: &[1, 2, 3],
     };
 
     s.set_callback(MyCallback {
