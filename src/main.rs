@@ -1,5 +1,5 @@
 mod changeme;
-use crate::changeme::{MyTrait,MyStruct,MyCallback,MyCallbackData};
+use changeme::{MyTrait,MyStruct,MyCallback,MyCallbackData};
 
 fn main() {
     let mut s = MyStruct {
