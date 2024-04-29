@@ -17,4 +17,4 @@ Goal:
 - Provide a solution that you would propose to fix it
 - Add the patched code and documentation to the repository
 - you are only allowed to modify the file src/changeme.rs
-- Provide us a git patch or pull request with your work
+- Provide us a git patch with your work! 
