@@ -1,0 +1,68 @@
+From 008b39cce4f2acaf3dba8cf5ac6394a5559239cc Mon Sep 17 00:00:00 2001
+From: Zied-Mabrouk <zied.mabrouk@esprit.tn>
+Date: Wed, 1 May 2024 20:35:52 +0200
+Subject: [PATCH 3/3] fix code
+
+---
+ src/changeme.rs | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/src/changeme.rs b/src/changeme.rs
+index 5a33381..b76e102 100644
+--- a/src/changeme.rs
++++ b/src/changeme.rs
+@@ -1,14 +1,14 @@
+ pub trait CallbackData {}
+ 
+ #[derive(Debug)]
+-pub struct MyCallbackData<'a> {
+-    data: &'a [u8],
++pub struct MyCallbackData {
++    data: [u8; 3], 
+ }
+ 
+-impl<'a> CallbackData for MyCallbackData<'a> {}
++impl CallbackData for MyCallbackData {}
+ 
+ pub struct MyCallback<T: CallbackData> {
+-    callback: Box<dyn Fn(&T)>,
++    pub callback: Box<dyn Fn(&T)>,
+ }
+ 
+ pub trait MyTrait<T: CallbackData> {
+@@ -16,13 +16,13 @@ pub trait MyTrait<T: CallbackData> {
+     fn do_something(&self);
+ }
+ 
+-pub struct MyStruct<T: CallbackData> {
+-    callbacks: Vec<MyCallback<T>>,
+-    data: [u8; 3],
++pub struct MyStruct< T: CallbackData > {
++    pub callbacks: Vec<MyCallback<T>>,
++    pub data: [u8; 3], 
+ }
+ 
+-impl<'a> MyTrait<MyCallbackData<'a>> for MyStruct<MyCallbackData<'a>> {
+-    fn set_callback(&mut self, cb: MyCallback<MyCallbackData<'a>>) {
++impl<'a> MyTrait<MyCallbackData> for MyStruct< MyCallbackData> {
++    fn set_callback(&mut self, cb: MyCallback<MyCallbackData>) {
+         self.callbacks.push(cb);
+     }
+ 
+@@ -30,10 +30,10 @@ impl<'a> MyTrait<MyCallbackData<'a>> for MyStruct<MyCallbackData<'a>> {
+ 
+         for cb in &self.callbacks {
+             let cb_data = MyCallbackData {
+-                data: &self.data,
++                data: self.data, 
+             };
+ 
+             (cb.callback)(&cb_data);
+         }
+     }
+-}
+\ No newline at end of file
++}
+-- 
+2.43.0
+

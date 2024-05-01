@@ -1,0 +1,22 @@
+From 57c8861379e6ec14532575d641c769346fef94e9 Mon Sep 17 00:00:00 2001
+From: Zied-Mabrouk <zied.mabrouk@esprit.tn>
+Date: Wed, 1 May 2024 20:35:45 +0200
+Subject: [PATCH 2/3] Create solution.txt
+
+---
+ solution.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 solution.txt
+
+diff --git a/solution.txt b/solution.txt
+new file mode 100644
+index 0000000..aa67624
+--- /dev/null
++++ b/solution.txt
+@@ -0,0 +1,2 @@
++Removing the lifetime problem introduced by MyStruct
++Making MyStruct and MyCallback attributes public in order to remove the restriction on Encapsulation.
+\ No newline at end of file
+-- 
+2.43.0
+
