@@ -1,0 +1,2 @@
+Removing the lifetime problem introduced by MyStruct
+Making MyStruct and MyCallback attributes public in order to remove the restriction on Encapsulation.
