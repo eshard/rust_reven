@@ -1,0 +1,2 @@
+The problem is that we're trying to store multiple callbacks in MyStruct when it introduces an unecessary lifetime.
+Also, in main.rs we're creating a MyStruct instance and a MyCallback instance while their attributes are private.
